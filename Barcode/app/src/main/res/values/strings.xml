@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="app_name">描码</string>
+    <string name="default_desc">将取景框对准码区，即可自动扫描</string>
+    <string name="action_photo_desc">相册</string>
+    <string name="action_light_on_desc">开灯</string>
+    <string name="action_light_off_desc">关灯</string>
+    <string name="action_produce_desc">创建二维码</string>
+    <string name="label_format">格式:{format}</string>
+    <string name="label_meta">元数据:{meta}</string>
+    <string name="label_code_value">https://www.google.com</string>
+    <string name="label_time">时间:{time}</string>
+    <string name="label_type">类型:{type}</string>
+</resources>

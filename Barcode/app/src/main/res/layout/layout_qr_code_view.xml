@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/height_qr_box_view_desc"
+        android:layout_above="@+id/fl_box_view"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="@string/default_desc"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/f_qr_box_view_desc" />
+
+    <!--we need to keep scanner view locates in center-->
+    <FrameLayout
+        android:id="@+id/fl_box_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_scan_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_margin="2dip"
+            android:background="@drawable/explore_line"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_action_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="6dp"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/btn_photo"
+            style="@style/style_qr_box_view_button"
+            android:drawableTop="@drawable/photo"
+            android:text="@string/action_photo_desc" />
+
+        <CheckBox
+            android:id="@+id/btn_light"
+            style="@style/style_qr_box_view_button"
+            android:button="@null"
+            android:drawableTop="@drawable/light"
+            android:text="@string/action_light_on_desc" />
+
+        <Button
+            android:id="@+id/btn_produce"
+            style="@style/style_qr_box_view_button"
+            android:drawableTop="@drawable/produce"
+            android:text="@string/action_produce_desc" />
+    </LinearLayout>
+</merge>

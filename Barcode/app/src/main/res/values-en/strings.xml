@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="app_name">QRScanner</string>
+    <string name="default_desc">Auto Scan</string>
+    <string name="action_photo_desc">Photo</string>
+    <string name="action_light_on_desc">On</string>
+    <string name="action_light_off_desc">Off</string>
+    <string name="action_produce_desc">Create</string>
+    <string name="label_format">format:{format}</string>
+    <string name="label_meta">meta:{meta}</string>
+    <string name="label_code_value">https://www.google.com</string>
+    <string name="label_time">time:{time}</string>
+    <string name="label_type">type:{type}</string>
+</resources>

@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="width_qr_box_view">320dp</dimen>
+    <dimen name="height_qr_box_view">320dp</dimen>
+</resources>

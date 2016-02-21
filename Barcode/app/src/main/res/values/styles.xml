@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light"></style>
+
+    <style name="style_qr_box_view_button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/f_qr_box_action_desc</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">@null</item>
+        <item name="android:layout_marginLeft">@dimen/ml_qr_box_action</item>
+    </style>
+
+    <style name="style_dialog_result_desc">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/result_minor_text</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:gravity">right</item>
+    </style>
+
+    <style name="style_dialog_result_value">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/result_text</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:textIsSelectable">true</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:text">@string/label_code_value</item>
+    </style>
+
+    <style name="Black_Theme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/black_theme</item>
+    </style>
+
+</resources>

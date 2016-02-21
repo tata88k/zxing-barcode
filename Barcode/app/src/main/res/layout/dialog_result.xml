@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/result_view"
+    android:orientation="horizontal"
+    android:padding="6dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:gravity="right|center_vertical"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_barcode"
+            android:layout_width="140dip"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/half_padding"
+            android:adjustViewBounds="true"
+            android:maxHeight="140dip"
+            android:maxWidth="140dip"
+            android:scaleType="centerCrop"
+            android:src="@drawable/explore_icon"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_format"
+            style="@style/style_dialog_result_desc"
+            android:text="@string/label_format" />
+
+        <TextView
+            android:id="@+id/tv_type"
+            style="@style/style_dialog_result_desc"
+            android:text="@string/label_type" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            style="@style/style_dialog_result_desc"
+            android:text="@string/label_time" />
+
+        <TextView
+            android:id="@+id/tv_meta"
+            style="@style/style_dialog_result_desc"
+            android:text="@string/label_meta" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_value"
+            style="@style/style_dialog_result_value"
+            android:autoLink="web"
+            android:textColorLink="@color/result_text"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_value_supplement"
+            style="@style/style_dialog_result_value" />
+    </LinearLayout>
+
+</LinearLayout>
