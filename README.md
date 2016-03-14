@@ -1,5 +1,5 @@
-# Zxing-Barcode
-A barcode scanner based on Zxing
+# zxing-barcode
+A barcode scanner based on zxing
  * Support screen auto rotate (both Landscape and portrail)
  * Simplify Zxing example code for android
  * Highly custom FinderView
