@@ -1,5 +1,6 @@
 package com.pacific.barcode;
 
+import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,24 +9,17 @@ import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.YuvImage;
-import android.os.Vibrator;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
 import com.google.zxing.MultiFormatReader;
 import com.google.zxing.RGBLuminanceSource;
 import com.google.zxing.Result;
-import com.pacific.common.Application;
-import com.pacific.common.ResourceUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-/**
- * Created by UsherBaby on 2016/2/19.
- */
 
 public abstract class BaseCameraManager {
     private Point qrBoxSize;
@@ -38,19 +32,18 @@ public abstract class BaseCameraManager {
     protected int displayOrientation;
     protected MultiFormatReader reader;
     protected OnResultListener onResultListener;
+    protected Context context;
 
-    public BaseCameraManager() {
+    public BaseCameraManager(Context context) {
+        this.context = context;
         executor = Executors.newSingleThreadExecutor();
         reader = new MultiFormatReader();
         qrBoxSize = new Point();
-        qrBoxSize.x = (int) ResourceUtils.getDimension(R.dimen.width_qr_box_view);
-        qrBoxSize.y = (int) ResourceUtils.getDimension(R.dimen.height_qr_box_view);
+        qrBoxSize.x = (int) context.getResources().getDimension(R.dimen.width_qr_box_view);
+        qrBoxSize.y = (int) context.getResources().getDimension(R.dimen.height_qr_box_view);
     }
 
-    public void vibrate() {
-        Vibrator vibrator = (Vibrator) Application.getInstance().getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(300);
-    }
+
 
 
     protected QRResult getCodeValue(byte[] data, Point previewSize) {

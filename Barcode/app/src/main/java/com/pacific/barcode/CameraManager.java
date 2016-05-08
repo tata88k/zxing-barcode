@@ -1,5 +1,6 @@
 package com.pacific.barcode;
 
+import android.content.Context;
 import android.graphics.Point;
 import android.hardware.Camera;
 import android.util.Log;
@@ -16,11 +17,15 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
- * This class is for android targets below 5.0 and it uses old camera api
+ * This class is for android targets below android 5.0 and it uses old camera api
  */
 public class CameraManager extends BaseCameraManager implements Camera.AutoFocusCallback, Camera.PreviewCallback {
 
     private Camera camera;
+
+    public CameraManager(Context context) {
+        super(context);
+    }
 
     @Override
     public void onAutoFocus(boolean success, Camera camera) {
@@ -30,7 +35,7 @@ public class CameraManager extends BaseCameraManager implements Camera.AutoFocus
 
     @Override
     public void connectCamera(SurfaceHolder surfaceHolder) {
-        if(!isRelease) return;
+        if (!isRelease) return;
         try {
             camera = Camera.open();
             isRelease = false;
@@ -124,7 +129,7 @@ public class CameraManager extends BaseCameraManager implements Camera.AutoFocus
 
     @Override
     public void onPreviewFrame(final byte[] data, final Camera camera) {
-        if (hook || executor.isShutdown())return;
+        if (hook || executor.isShutdown()) return;
         Observable
                 .just(camera.getParameters().getPreviewSize())
                 .subscribeOn(Schedulers.from(executor))
@@ -143,7 +148,7 @@ public class CameraManager extends BaseCameraManager implements Camera.AutoFocus
                             startCapture();
                             return;
                         }
-                        vibrate();
+                        QRUtils.vibrate(context);
                         if (onResultListener != null) {
                             onResultListener.onResult(qrResult);
                         }

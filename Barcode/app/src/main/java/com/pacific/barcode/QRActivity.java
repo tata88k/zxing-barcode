@@ -2,13 +2,13 @@ package com.pacific.barcode;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.SurfaceHolder;
 
 import com.google.zxing.MultiFormatReader;
-import com.pacific.common.Activity;
-import com.pacific.common.AndroidUtils;
+import com.pacific.mvc.Activity;
 import com.trello.rxlifecycle.ActivityEvent;
 
 import rx.Observable;
@@ -17,34 +17,40 @@ import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
-public class QRActivity extends Activity implements SurfaceHolder.Callback {
-
-    private QRMediator qrMediator;
+public class QRActivity extends Activity<QRModel>{
+    public static final int CODE_PICK_IMAGE = 0x100;
     private BaseCameraManager cameraManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr);
-        qrMediator = new QRMediator(this);
-        if (AndroidUtils.is_21()) {
-            cameraManager = new CameraManager();
+        if (Build.VERSION_CODES.LOLLIPOP >= Build.VERSION.SDK_INT) {
+            cameraManager = new CameraManager(getApplication());
         } else {
-            cameraManager = new CameraManager();
+            cameraManager = new CameraManager(getApplication());
         }
-        cameraManager.setOnResultListener(qrMediator);
+        model = new QRModel(new QRView(this));
+        model.onCreate();
+
+        cameraManager.setOnResultListener(new BaseCameraManager.OnResultListener() {
+            @Override
+            public void onResult(QRResult qrResult) {
+                model.resultDialog(qrResult);
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        qrMediator.setSurfaceViewVisible(true);
+        model.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        qrMediator.setSurfaceViewVisible(false);
+        model.onPause();
     }
 
     @Override
@@ -57,7 +63,7 @@ public class QRActivity extends Activity implements SurfaceHolder.Callback {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == qrMediator.getPickImageCode()) {
+        if (resultCode == RESULT_OK && requestCode == CODE_PICK_IMAGE) {
             String[] columns = {MediaStore.Images.Media.DATA};
             Cursor cursor = getContentResolver().query(data.getData(), columns, null, null, null);
             if (cursor.moveToFirst()) {
@@ -75,7 +81,7 @@ public class QRActivity extends Activity implements SurfaceHolder.Callback {
                         .subscribe(new Action1<QRResult>() {
                             @Override
                             public void call(QRResult qrResult) {
-                                qrMediator.onResult(qrResult);
+                                model.resultDialog(qrResult);
                             }
                         });
             }
@@ -83,18 +89,17 @@ public class QRActivity extends Activity implements SurfaceHolder.Callback {
         }
     }
 
-    @Override
-    public void surfaceCreated(SurfaceHolder holder) {
-        if(cameraManager.getExecutor().isShutdown()) return;
+    public void onSurfaceCreated(SurfaceHolder surfaceHolder) {
+        if (cameraManager.getExecutor().isShutdown()) return;
         Observable
-                .just(holder)
+                .just(surfaceHolder)
                 .compose(this.<SurfaceHolder>bindUntilEvent(ActivityEvent.PAUSE))
                 .observeOn(Schedulers.from(cameraManager.getExecutor()))
                 .map(new Func1<SurfaceHolder, Object>() {
                     @Override
-                    public Object call(SurfaceHolder surfaceHolder) {
+                    public Object call(SurfaceHolder holder) {
                         cameraManager.setRotate(getWindowManager().getDefaultDisplay().getRotation());
-                        cameraManager.connectCamera(surfaceHolder);
+                        cameraManager.connectCamera(holder);
                         return null;
                     }
                 })
@@ -102,19 +107,13 @@ public class QRActivity extends Activity implements SurfaceHolder.Callback {
                 .subscribe(new Action1<Object>() {
                     @Override
                     public void call(Object o) {
-                        qrMediator.setEmptyViewVisible(false);
+                        model.setEmptyViewVisible(false);
                         cameraManager.startCapture();
                     }
                 });
     }
 
-    @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-    }
-
-    @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
-        qrMediator.setEmptyViewVisible(true);
+    public void onSurfaceDestroyed(){
         cameraManager.releaseCamera();
     }
 

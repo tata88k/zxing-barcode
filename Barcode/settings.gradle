@@ -1,1 +1,1 @@
-include ':app', ':Pacific-Common'
+include ':app'

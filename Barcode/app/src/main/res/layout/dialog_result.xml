@@ -18,7 +18,7 @@
             android:id="@+id/img_barcode"
             android:layout_width="140dip"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/half_padding"
+            android:layout_marginBottom="6dp"
             android:adjustViewBounds="true"
             android:maxHeight="140dip"
             android:maxWidth="140dip"

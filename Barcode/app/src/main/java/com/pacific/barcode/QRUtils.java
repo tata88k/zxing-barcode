@@ -1,7 +1,9 @@
 package com.pacific.barcode;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Vibrator;
 import android.util.Log;
 
 import com.google.zxing.BinaryBitmap;
@@ -74,5 +76,10 @@ public class QRUtils {
             }
         }
         return result;
+    }
+
+    public static void vibrate(Context context) {
+        Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(300);
     }
 }
