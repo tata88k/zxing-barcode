@@ -6,4 +6,4 @@ A barcode scanner based on zxing
  * Simplify Zxing example code for android
  * Highly custom FinderView
 <p>
-![](https://github.com/ThePacific/Zxing-Barcode/blob/master/gif/example.gif)
+![](https://github.com/thepacific/Zxing-Barcode/blob/master/gif/example.gif)
