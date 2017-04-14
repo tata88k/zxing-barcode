@@ -5,5 +5,5 @@ A barcode scanner based on zxing
  * Support screen auto rotate (both Landscape and portrail)
  * Simplify Zxing example code for android
  * Highly custom FinderView
-<p>
-![](https://github.com/thepacific/Zxing-Barcode/blob/master/gif/example.gif)
+
+![](https://github.com/thepacific/zxing-barcode/blob/master/gif/example.gif)
